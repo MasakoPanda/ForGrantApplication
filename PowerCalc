@@ -1,0 +1,29 @@
+# Power calculation for grant application
+# you can run following on R to estimate the detectable alternatives with your sample size and the expected variation. 
+
+# Here is an example of the power calculation section we had.
+#Power calculations:  We will perform X-WGBS on n=200 per group.  We use a ≥0.10 DNA methylation beta value difference (comparable with changes seen at epigenetic clock CpGs [2]) with an adjusted p-value <0.01 as a threshold for DNA methylation changes (n=200 per group, estimated standard deviation=0.05) for X-WGBS.  This is much greater than the detectable effect size from Student’s t-test power estimation (n=200, detectable variance between group beta = 0.036, significance level=1x10-8, power=0.9).  
+
+## detectable differences
+
+sample<-200 # sample number
+group <- 2# group number
+esd <-0.05 #estimated within variation
+power <- 0.9 # power of test, type II error
+sig <- 0.00000001 # Significance level, type I error
+
+# ANOVA #
+power.anova.test(group,sample,NULL,esd,sig,power)
+
+# t-test #
+power.t.test(sample,NULL,esd,sig,power)
+
+
+## Sample size estimates
+
+library("samplesize")
+n.ttest(power = 0.8, alpha = 0.05, mean.diff = 0.80, sd1 = 0.83, k = 1,
+        design = "unpaired", fraction = "balanced", variance = "equal")
+
+
+# For RNA-seq, you can perform the power calculation with RNAseqPS (https://cqs.mc.vanderbilt.edu/shiny/RnaSeqSampleSize/).
