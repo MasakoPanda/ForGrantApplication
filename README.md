@@ -1,2 +1,2 @@
 # ForGrantApplication
-Codes we can use for grant application
+Code we can use for grant application
